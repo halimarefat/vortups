@@ -6,7 +6,7 @@ mrstModule add mrst-gui vortups coarsegrid mimetic incomp agglom upscaling msrsb
 verbose = true;
 %% Cartesian fine Geometry is defined and initial solution is done
 res_n = 1;
-dims  = res_n * [80, 30, 1];
+dims  = res_n * [80, 20, 1];
 cells = dims(1,1)* dims(1,2);
 G = cartGrid(dims, dims);
 G = computeGeometry(G);
@@ -36,8 +36,10 @@ rock.poro = zeros(cells, 1);
 rock.poro(:) = 0.2;
 
 W     = [];
-inj   = (1:80:1000);
-prod  = (1440:80:G.cells.num);
+% inj   = (1:80:1000);
+% prod  = (1440:80:G.cells.num);
+inj   = (561:80:G.cells.num);
+prod  = (80:80:800);
 for i = 1:numel(inj)
 W     = addWell(W, G, rock, inj(i),      ...
             'Type', 'rate' , 'Val', 7.7*meter^3/day(), ...
@@ -79,8 +81,9 @@ title('Initial flux intensity'), view(3)
 plotCellData(G, vor);
 title('Vorticity Map'), view(2)
 
-iVor= log10(vor); iVor = iVor - min(iVor) + 1;  
-p1  = partitionUI(G, [10, 6, 1]);
+iVor= (vor); 
+% iVor = iVor - min(iVor) + 1;  
+p1  = partitionUI(G, [10, 4, 1]);
 p   = refineUniform(p1, G, iVor, 41, 'cartDims', [2 2 1]);
 p   = compressPartition(p);
 [blks, p] = findConfinedBlocks(G, p);
