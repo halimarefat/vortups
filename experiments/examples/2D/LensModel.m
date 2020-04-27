@@ -6,13 +6,13 @@ mrstModule add mrst-gui vortups coarsegrid mimetic incomp agglom upscaling msrsb
 verbose = true;
 %% Cartesian fine Geometry is defined and initial solution is done
 res_n = 1;
-dims  = res_n * [81, 20];
+dims  = res_n * [81, 30, 1];
 cells = dims(1,1)* dims(1,2);
 G = cartGrid(dims, dims);
 G = computeGeometry(G);
 rock.perm = zeros(cells, 1);
 rock.perm(:) = 1;
-lens_dim1 = res_n * [48,10];
+lens_dim1 = res_n * [48,10, 1];
 row = res_n * 7;
 col = res_n * 10;
 cell_str = row*dims(1,1)+ col;
@@ -29,7 +29,8 @@ rock.perm(lens_indx1(:)) = 0.001;
 clf, 
 plotGrid(G, 'EdgeColor', 'none');
 plotCellData(G, log10(rock.perm(:,1)), 'EdgeColor', 'k'), axis equal tight off;
- 
+hold on
+
 rock.poro = zeros(cells, 1);
 rock.poro(:) = 0.2;
 
@@ -44,6 +45,8 @@ W     = addWell(W, G, rock, prod,      ...
             'Type', 'bhp' , 'Val', 0*barsa(), ...
             'Radius', 0.125*meter, 'Sign',-1, ...
             'name', 'P1', 'InnerProduct', 'ip_tpf', 'Comp_i', [0, 1]); 
+plotWell(G, W);
+
 MR    = 1; % mobility ratio      
 fluid = initSimpleFluid('mu' , [   1,MR*1]*centi*poise     , ...
                         'rho', [1014, 859]*kilogram/meter^3, ...

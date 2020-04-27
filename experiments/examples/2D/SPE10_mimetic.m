@@ -5,7 +5,7 @@ close all;
 %% Load the required modules
 mrstModule add mrst-gui vortups coarsegrid mimetic incomp spe10 steady-state agglom upscaling
 %% Cartesian fine Geometry is defined and initial solution is done
-refined      = false;
+refined      = true;
 [G, ~, rock] = getSPE10setup(56);
 rock.poro    = max(rock.poro, 1e-4);
 
