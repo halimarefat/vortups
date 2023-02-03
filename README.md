@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/SchematicFlowchart.png" width="450" align="center">
+  <img src="/SchematicFlowchart.png" width="550" align="center">
 </p>
 
 # vortups
