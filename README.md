@@ -1,3 +1,4 @@
-<img src="/SchematicFlowchart.png" width="800" align="center">
+<img src="/SchematicFlowchart.png" width="450" align="center">
+
 # vortups
 This module implement vorticity preservation as a upscaling/upgridding technique to generate a coarse grid. The obtained coarse grid can be used as the main grid in a simulation or can be implemented in a multiscale framework.
